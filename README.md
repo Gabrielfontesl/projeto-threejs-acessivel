@@ -114,48 +114,69 @@ npm run preview
 
 ```
 projeto-threejs-acessivel/
-├── index.html              # HTML semântico com landmarks, ARIA e VLibras
+├── index.html                       # HTML semântico com landmarks, ARIA e VLibras
 ├── package.json
 ├── vite.config.js
-├── netlify.toml            # Deploy no Netlify
-├── vercel.json             # Deploy no Vercel
-├── LICENSE                 # MIT
+├── netlify.toml                     # Deploy no Netlify
+├── vercel.json                      # Deploy no Vercel
+├── LICENSE                          # MIT
 ├── README.md
+├── CONTRIBUTING.md                  # Guia de contribuição
+├── ACCESSIBILITY.md                 # Declaração detalhada de acessibilidade
+├── .github/
+│   ├── workflows/
+│   │   └── deploy.yml               # Deploy automático para GitHub Pages
+│   ├── ISSUE_TEMPLATE/
+│   │   ├── feature_request.md       # Template "Nova Funcionalidade"
+│   │   ├── bug_report.md            # Template de bug
+│   │   └── config.yml
+│   └── PULL_REQUEST_TEMPLATE.md
 ├── public/
 │   ├── favicon.svg
-│   └── models/             # ← Coloque aqui seu modelo Sketchfab
+│   └── models/                      # ← Coloque aqui seu modelo Sketchfab
 │       └── README.md
 └── src/
-    ├── main.js             # Entrada — orquestra os módulos
-    ├── scene.js            # Three.js: renderer, camera, luzes, loader, controls, loop
-    ├── accessibility.js    # Controles de fonte, contraste e tema
-    ├── animations.js       # GSAP + Lenis
-    └── style.css           # CSS com variáveis para tema e alto contraste
+    ├── main.js                      # Entrada — orquestra os módulos
+    ├── scene.js                     # Three.js: renderer, camera, luzes, loader, controls, loop
+    ├── accessibility.js             # Controles de fonte, contraste e tema
+    ├── animations.js                # GSAP + Lenis
+    └── style.css                    # CSS com variáveis para tema e alto contraste
 ```
 
 ---
 
 ## ☁️ Deploy
 
-A aplicação é estática — qualquer hospedagem serve. Estão pré-configurados:
+A aplicação é estática — qualquer hospedagem serve. Há **3 caminhos de deploy** prontos:
 
-### Netlify (recomendado)
-1. Faça push do repositório para o GitHub
-2. Em [app.netlify.com](https://app.netlify.com) → **Add new site** → **Import from Git**
-3. O `netlify.toml` já configura `npm run build` e `publish = dist`
-4. Pronto. URL gerada automaticamente.
+### 🟢 GitHub Pages (automático via Actions — recomendado)
+1. Crie um repositório no GitHub e empurre o código (instruções abaixo)
+2. No GitHub: **Settings → Pages → Source** → escolha **GitHub Actions**
+3. Toda push para `main` dispara o workflow [`.github/workflows/deploy.yml`](.github/workflows/deploy.yml)
+4. A URL final será `https://<usuario>.github.io/<repositorio>/`
 
-### Vercel
-1. Push para o GitHub
-2. Em [vercel.com](https://vercel.com) → **Add New** → **Project**
-3. Framework preset: **Vite** (detectado automaticamente via `vercel.json`)
-4. Deploy.
+### 🔵 Netlify
+1. Em [app.netlify.com](https://app.netlify.com) → **Add new site → Import from Git**
+2. O [`netlify.toml`](netlify.toml) já configura `npm run build` e `publish = dist`
+3. URL gerada automaticamente; deploys contínuos a cada push
 
-### GitHub Pages
+### ⚫ Vercel
+1. Em [vercel.com](https://vercel.com) → **Add New → Project**
+2. Framework preset: **Vite** (detectado via [`vercel.json`](vercel.json))
+3. Deploy.
+
+### 📤 Como empurrar para o GitHub (primeira vez)
+
 ```bash
-npm run build
-# A pasta `dist/` é o site estático. Faça upload via GitHub Action
-# ou empurre para a branch `gh-pages`.
+# Crie o repositório vazio em github.com/new (sem README/license/gitignore)
+
+# Aponte o remote e empurre
+git remote add origin https://github.com/SEU_USUARIO/projeto-threejs-acessivel.git
+git branch -M main
+git push -u origin main
+
+# Habilite Pages: Settings → Pages → Source = GitHub Actions
+# Em ~2 min sua URL estará no ar
 ```
 
 ---
