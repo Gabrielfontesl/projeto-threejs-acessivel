@@ -1,0 +1,22 @@
+{
+  "name": "projeto-threejs-acessivel",
+  "version": "1.0.0",
+  "description": "Cena 3D interativa com Three.js + Sketchfab, GSAP, Lenis e acessibilidade completa (VLibras, alto contraste, controle de fonte).",
+  "type": "module",
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build",
+    "preview": "vite preview --port 4173"
+  },
+  "dependencies": {
+    "three": "^0.169.0",
+    "gsap": "^3.12.5",
+    "lenis": "^1.1.13"
+  },
+  "devDependencies": {
+    "vite": "^5.4.8"
+  },
+  "engines": {
+    "node": ">=18"
+  }
+}
