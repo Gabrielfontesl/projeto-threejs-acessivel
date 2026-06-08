@@ -2,13 +2,14 @@ import * as THREE from 'three';
 import { OrbitControls } from 'three/addons/controls/OrbitControls.js';
 import { GLTFLoader } from 'three/addons/loaders/GLTFLoader.js';
 
-// Coloque o modelo baixado do Sketchfab em `public/models/` e atualize o caminho abaixo.
-// Formatos aceitos: .gltf (+ .bin + texturas) ou .glb (binário, arquivo único).
-const MODEL_URL = './models/scene.gltf';
+// Modelo incluído: ToyCar.glb (Khronos Group glTF Sample Models, licença CC0).
+// Para usar seu próprio modelo do Sketchfab, substitua o arquivo em `public/models/scene.glb`
+// (ou atualize o caminho abaixo). Veja `public/models/README.md` para instruções.
+const MODEL_URL = './models/scene.glb';
 
-// Modelo público de fallback (Duck.glb da Khronos Group, CC-BY) caso não exista local.
+// Fallback online caso o arquivo local falhe (mesmo modelo, via CDN).
 const FALLBACK_MODEL_URL =
-  'https://cdn.jsdelivr.net/gh/KhronosGroup/glTF-Sample-Models@master/2.0/Duck/glTF-Binary/Duck.glb';
+  'https://cdn.jsdelivr.net/gh/KhronosGroup/glTF-Sample-Models@master/2.0/ToyCar/glTF-Binary/ToyCar.glb';
 
 export function initScene({ container, loadingScreen, loadingBar, loadingText, announce }) {
   if (!container) return null;

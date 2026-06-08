@@ -77,23 +77,27 @@ npm run preview
 
 ---
 
-## 🎨 Como usar um modelo do Sketchfab
+## 🎨 Modelo 3D
+
+O projeto já vem com um modelo **ToyCar** (veículo, licença **CC0**) incluído em
+[`public/models/scene.glb`](public/models/scene.glb) — fonte: Khronos Group glTF Sample Models.
+Atributo de tema: **veículo**, alinhado às sugestões do enunciado. Veja
+[`public/models/CREDITS.md`](public/models/CREDITS.md) para detalhes.
+
+### Trocar pelo seu modelo do Sketchfab
 
 1. Crie uma conta em [sketchfab.com](https://sketchfab.com)
-2. Ative o filtro **"Downloadable"** e escolha um modelo com licença permissiva (CC-BY)
+2. Filtre por **"Downloadable"** e escolha um modelo com licença permissiva (**CC-BY** ou **CC0**)
 3. ⚠️ **Não use modelos com conteúdo obsceno, violento ou ofensivo** — nota zero
 4. Sugestões: objetos, arquitetura, natureza, animais, veículos
-5. Baixe no formato **glTF** (recomendado) ou **GLB**
-6. Extraia o conteúdo na pasta `public/models/`
-7. Se o arquivo principal não for `scene.gltf` ou `scene.glb`, atualize a constante
-   `MODEL_URL` em [`src/scene.js`](src/scene.js):
+5. Baixe no formato **glTF** ou **GLB**
+6. Substitua o arquivo em `public/models/scene.glb` (ou ajuste `MODEL_URL` em
+   [`src/scene.js`](src/scene.js) se preferir outro nome)
+7. Atualize [`public/models/CREDITS.md`](public/models/CREDITS.md) com nome, autor e licença
+   do novo modelo
 
-   ```js
-   const MODEL_URL = './models/seu-arquivo.glb';
-   ```
-
-> Se não houver modelo local, a aplicação carrega automaticamente o **Duck.glb** da Khronos
-> Group como fallback, garantindo que a cena nunca fique vazia.
+> Se o arquivo local falhar por qualquer motivo, a aplicação carrega automaticamente
+> o mesmo modelo via CDN como fallback, garantindo que a cena nunca apareça vazia.
 
 ---
 
@@ -230,4 +234,7 @@ O modelo 3D escolhido deve seguir a licença do autor original no Sketchfab
 - [GSAP](https://gsap.com) — GreenSock
 - [Lenis](https://github.com/darkroomengineering/lenis) — Darkroom Engineering
 - [VLibras](https://vlibras.gov.br) — Governo Federal do Brasil
-- [Khronos glTF Sample Models](https://github.com/KhronosGroup/glTF-Sample-Models) — modelo de fallback (Duck)
+- **Modelo 3D:** *Toy Car* por Microsoft, fonte
+  [Khronos glTF Sample Models](https://github.com/KhronosGroup/glTF-Sample-Models/tree/master/2.0/ToyCar),
+  licença **CC0 1.0** (domínio público). Detalhes em
+  [`public/models/CREDITS.md`](public/models/CREDITS.md).
