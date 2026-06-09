@@ -1,14 +1,15 @@
 # Créditos do modelo 3D
 
-## Modelo atual: `scene.glb` (ToyCar)
+## Modelo atual: `scene.glb` (BoomBox)
 
-- **Nome:** Toy Car
+- **Nome:** BoomBox
 - **Autor:** Microsoft (3D Content team)
-- **Fonte:** [Khronos Group glTF Sample Models](https://github.com/KhronosGroup/glTF-Sample-Models/tree/master/2.0/ToyCar)
+- **Fonte:** [Khronos Group glTF Sample Models](https://github.com/KhronosGroup/glTF-Sample-Models/tree/master/2.0/BoomBox)
 - **Licença:** **CC0 1.0 Universal (Domínio Público)** — uso livre, sem necessidade de atribuição
 - **Formato:** glTF 2.0 Binary (.glb), single-file
-- **Tamanho:** ~5.8 MB
-- **Tema:** Veículo (atende à recomendação do enunciado: "objetos, arquitetura, natureza, animais ou veículos")
+- **Tamanho:** ~10.9 MB (texturas PBR completas embutidas)
+- **Tema:** Objeto (rádio retrô anos 80) — atende à recomendação do enunciado:
+  "objetos, arquitetura, natureza, animais ou veículos"
 
 Apesar da licença CC0 não exigir atribuição, mantemos o crédito por boa prática.
 

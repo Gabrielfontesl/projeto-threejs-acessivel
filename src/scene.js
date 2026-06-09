@@ -2,14 +2,14 @@ import * as THREE from 'three';
 import { OrbitControls } from 'three/addons/controls/OrbitControls.js';
 import { GLTFLoader } from 'three/addons/loaders/GLTFLoader.js';
 
-// Modelo incluído: ToyCar.glb (Khronos Group glTF Sample Models, licença CC0).
+// Modelo incluído: BoomBox.glb (Khronos Group glTF Sample Models, licença CC0).
 // Para usar seu próprio modelo do Sketchfab, substitua o arquivo em `public/models/scene.glb`
 // (ou atualize o caminho abaixo). Veja `public/models/README.md` para instruções.
 const MODEL_URL = './models/scene.glb';
 
 // Fallback online caso o arquivo local falhe (mesmo modelo, via CDN).
 const FALLBACK_MODEL_URL =
-  'https://cdn.jsdelivr.net/gh/KhronosGroup/glTF-Sample-Models@master/2.0/ToyCar/glTF-Binary/ToyCar.glb';
+  'https://cdn.jsdelivr.net/gh/KhronosGroup/glTF-Sample-Models@master/2.0/BoomBox/glTF-Binary/BoomBox.glb';
 
 export function initScene({ container, loadingScreen, loadingBar, loadingText, announce }) {
   if (!container) return null;
@@ -27,6 +27,15 @@ export function initScene({ container, loadingScreen, loadingBar, loadingText, a
   renderer.shadowMap.enabled = true;
   renderer.shadowMap.type = THREE.PCFSoftShadowMap;
   container.appendChild(renderer.domElement);
+
+  // Impede que o scroll/zoom na cena role a página
+  container.addEventListener(
+    'wheel',
+    (event) => {
+      event.preventDefault();
+    },
+    { passive: false }
+  );
 
   const scene = new THREE.Scene();
   scene.background = new THREE.Color(0x131826);
@@ -59,12 +68,12 @@ export function initScene({ container, loadingScreen, loadingBar, loadingText, a
   const hemisphereLight = new THREE.HemisphereLight(0xb1e1ff, 0x444a55, 0.45);
   scene.add(hemisphereLight);
 
-  // Plano de chão para receber sombras
-  const groundGeometry = new THREE.PlaneGeometry(40, 40);
-  const groundMaterial = new THREE.ShadowMaterial({ opacity: 0.25 });
+  // Plano circular sutil sob o modelo — só recebe a sombra, sem aparecer como superfície
+  const groundGeometry = new THREE.CircleGeometry(4, 64);
+  const groundMaterial = new THREE.ShadowMaterial({ opacity: 0.18 });
   const ground = new THREE.Mesh(groundGeometry, groundMaterial);
   ground.rotation.x = -Math.PI / 2;
-  ground.position.y = -1.2;
+  ground.position.y = -1.0;
   ground.receiveShadow = true;
   scene.add(ground);
 
@@ -127,6 +136,10 @@ export function initScene({ container, loadingScreen, loadingBar, loadingText, a
     });
 
     scene.add(loadedModel);
+
+    // Posiciona o disco de sombra exatamente sob a base real do modelo carregado
+    const finalBox = new THREE.Box3().setFromObject(loadedModel);
+    ground.position.y = finalBox.min.y + 0.001;
 
     updateProgress(100);
     if (loadingScreen) {

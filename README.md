@@ -89,9 +89,9 @@ npm run preview
 
 ## 🎨 Modelo 3D
 
-O projeto já vem com um modelo **ToyCar** (veículo, licença **CC0**) incluído em
+O projeto já vem com um modelo **BoomBox** (rádio retrô, licença **CC0**) incluído em
 [`public/models/scene.glb`](public/models/scene.glb) — fonte: Khronos Group glTF Sample Models.
-Atributo de tema: **veículo**, alinhado às sugestões do enunciado. Veja
+Atributo de tema: **objeto**, alinhado às sugestões do enunciado. Veja
 [`public/models/CREDITS.md`](public/models/CREDITS.md) para detalhes.
 
 ### Trocar pelo seu modelo do Sketchfab
@@ -237,11 +237,7 @@ O modelo 3D escolhido deve seguir a licença do autor original no Sketchfab
 
 ## 🙏 Créditos
 
-- [Three.js](https://threejs.org) — Mr.doob e contribuidores
-- [GSAP](https://gsap.com) — GreenSock
-- [Lenis](https://github.com/darkroomengineering/lenis) — Darkroom Engineering
-- [VLibras](https://vlibras.gov.br) — Governo Federal do Brasil
-- **Modelo 3D:** *Toy Car* por Microsoft, fonte
-  [Khronos glTF Sample Models](https://github.com/KhronosGroup/glTF-Sample-Models/tree/master/2.0/ToyCar),
-  licença **CC0 1.0** (domínio público). Detalhes em
-  [`public/models/CREDITS.md`](public/models/CREDITS.md).
+Construído com [Three.js](https://threejs.org), [GSAP](https://gsap.com),
+[Lenis](https://github.com/darkroomengineering/lenis) e [VLibras](https://vlibras.gov.br).
+Modelo 3D *BoomBox* por Microsoft, licença **CC0** (domínio público) —
+detalhes em [`public/models/CREDITS.md`](public/models/CREDITS.md).

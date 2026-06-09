@@ -113,6 +113,18 @@ code {
   border-radius: 4px;
 }
 
+kbd {
+  font-family: var(--font-mono);
+  font-size: 0.85em;
+  background: var(--color-surface-2);
+  border: 1px solid var(--color-border);
+  border-bottom-width: 2px;
+  padding: 0.1em 0.5em;
+  border-radius: 4px;
+  display: inline-block;
+  line-height: 1;
+}
+
 /* ============================================================
    Acessibilidade: skip link, visually-hidden, foco
    ============================================================ */
@@ -302,6 +314,9 @@ input:focus-visible {
   border-radius: var(--radius);
   overflow: hidden;
   box-shadow: var(--shadow);
+  /* Impede que gestos de toque/scroll na cena 3D mexam na página */
+  touch-action: none;
+  overscroll-behavior: contain;
 }
 
 .canvas-container canvas {

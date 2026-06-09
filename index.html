@@ -39,11 +39,13 @@
     <main id="main-content" class="main" tabindex="-1">
       <section class="hero" aria-labelledby="hero-title">
         <div class="hero__content">
-          <h2 id="hero-title" class="hero__title">Explore o modelo 3D</h2>
+          <h2 id="hero-title" class="hero__title">Oi! Dá uma olhada na cena</h2>
           <p class="hero__lead">
-            Modelo carregado do Sketchfab via <code>GLTFLoader</code>, com câmera totalmente
-            interativa — rotação, zoom e pan por mouse, toque ou teclado. Construído com Three.js,
-            GSAP e Lenis, e com VLibras para acessibilidade em Libras.
+            Eu sou <strong>Gabriel</strong> e essa página é um experimento meu pra unir 3D
+            interativo com acessibilidade de verdade. Tem um modelo carregando aí embaixo —
+            pode girar, dar zoom e arrastar à vontade, no mouse, no celular ou pelo teclado.
+            Os botões no topo deixam a fonte maior, mudam o contraste e o tema, e o boneco
+            azul no canto traduz a página para Libras via VLibras.
           </p>
         </div>
       </section>
@@ -96,29 +98,32 @@
       </section>
 
       <section class="info" aria-labelledby="info-title">
-        <h2 id="info-title">Como interagir</h2>
+        <h2 id="info-title">Como brincar com a cena</h2>
         <ul class="info__list">
           <li><strong>Girar:</strong> clique e arraste com o botão esquerdo (ou um dedo no touch)</li>
-          <li><strong>Zoom:</strong> roda do mouse ou pinça com dois dedos</li>
-          <li><strong>Pan:</strong> clique e arraste com o botão direito (ou dois dedos no touch)</li>
-          <li><strong>Teclado:</strong> ↑ ↓ ← → para girar a câmera</li>
-          <li><strong>Leitor de tela:</strong> anúncios via live region a cada ação dos controles</li>
+          <li><strong>Zoom:</strong> rolinho do mouse ou pinça com dois dedos — fica só na cena, não rola a página</li>
+          <li><strong>Mover (pan):</strong> clique e arraste com o botão direito (ou dois dedos no touch)</li>
+          <li><strong>Teclado:</strong> setas <kbd>↑</kbd> <kbd>↓</kbd> <kbd>←</kbd> <kbd>→</kbd> giram a câmera</li>
+          <li><strong>Leitor de tela:</strong> cada ação do painel é anunciada por uma live region</li>
         </ul>
       </section>
 
       <section class="about" aria-labelledby="about-title">
-        <h2 id="about-title">Sobre o projeto</h2>
+        <h2 id="about-title">Por trás dessa página</h2>
         <p>
-          Projeto acadêmico que demonstra o carregamento de modelos 3D do Sketchfab com Three.js
-          (cumprindo todos os critérios da atividade) e adiciona uma camada robusta de
-          acessibilidade: <strong>VLibras</strong> para tradução em Libras, controles de fonte,
-          modo de alto contraste, alternância de tema, foco visível, navegação por teclado e
-          respeito ao <code>prefers-reduced-motion</code>.
+          Esse é um trabalho acadêmico, mas tentei fugir do checklist seco e fazer
+          algo que parecesse com gente. A parte 3D é <strong>Three.js</strong> —
+          cena, câmera, três luzes, sombras, carregamento do modelo via
+          <code>GLTFLoader</code> e a câmera controlável com <code>OrbitControls</code>.
+          As animações de UI vêm do <strong>GSAP</strong> e a rolagem suave do
+          <strong>Lenis</strong>.
         </p>
         <p>
-          As animações de interface usam <strong>GSAP</strong> e a rolagem suave usa
-          <strong>Lenis</strong>. A aplicação é construída com Vite e pode ser publicada em
-          qualquer hospedagem estática (Netlify, Vercel ou GitHub Pages).
+          Em paralelo, coloquei uma camada de acessibilidade séria: <strong>VLibras</strong>
+          para tradução em Libras, controles de fonte, alto contraste, tema claro/escuro,
+          foco visível em tudo, navegação por teclado e respeito ao
+          <code>prefers-reduced-motion</code>. A intenção é que qualquer pessoa consiga
+          tirar proveito da cena, do jeito que combinar melhor com ela.
         </p>
       </section>
     </main>
@@ -130,7 +135,7 @@
         <a href="https://github.com/Gabrielfontesl/projeto-threejs-acessivel" target="_blank" rel="noopener">Ver no GitHub ↗</a>
       </p>
       <p class="footer__credits">
-        Modelo 3D: <em>Toy Car</em> por Microsoft — licença CC0 (domínio público),
+        Modelo 3D: <em>BoomBox</em> por Microsoft — licença CC0 (domínio público),
         via Khronos glTF Sample Models.
       </p>
       <div id="status" class="visually-hidden" aria-live="polite" aria-atomic="true"></div>
