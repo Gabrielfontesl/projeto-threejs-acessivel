@@ -1,45 +1,25 @@
 import gsap from 'gsap';
 import Lenis from 'lenis';
 
-const ANIMATED_SELECTORS = [
-  '.header',
-  '.hero__title',
-  '.hero__lead',
-  '.canvas-container',
-  '.scene-controls > *',
-  '.info',
-  '.about'
-];
-
 export function initAnimations() {
-  // Rede de segurança: independente do que aconteça, libera o conteúdo em 3s
-  const safety = setTimeout(forceVisible, 3000);
-
   const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-  if (reduceMotion) {
-    clearTimeout(safety);
-    return;
-  }
+  if (reduceMotion) return;
 
   try {
     initLenis();
-    runEntrance(() => clearTimeout(safety));
+  } catch (err) {
+    console.warn('Falha ao inicializar Lenis:', err);
+  }
+  try {
+    runEntrance();
+  } catch (err) {
+    console.warn('Falha na animação de entrada:', err);
+  }
+  try {
     bindHoverMicroInteractions();
   } catch (err) {
-    console.warn('Falha na inicialização das animações:', err);
-    clearTimeout(safety);
-    forceVisible();
+    console.warn('Falha ao ligar micro-interações:', err);
   }
-}
-
-function forceVisible() {
-  document.querySelectorAll(ANIMATED_SELECTORS.join(',')).forEach((el) => {
-    el.style.opacity = '';
-    el.style.transform = '';
-    el.style.translate = '';
-    el.style.rotate = '';
-    el.style.scale = '';
-  });
 }
 
 function initLenis() {
@@ -49,7 +29,7 @@ function initLenis() {
     smoothWheel: true,
     wheelMultiplier: 1.0,
     touchMultiplier: 1.4,
-    // Não intercepta rolagem sobre a cena 3D nem sobre o widget do VLibras
+    // Lenis não intercepta rolagem sobre a cena 3D nem sobre o widget do VLibras
     prevent: (node) => {
       if (!(node instanceof Element)) return false;
       if (node.closest('#canvas-container')) return true;
@@ -76,33 +56,19 @@ function initLenis() {
   });
 }
 
-function runEntrance(onDone) {
-  const tl = gsap.timeline({
-    defaults: { ease: 'power3.out', clearProps: 'all' },
-    onComplete: onDone
-  });
-  tl.from('.header', { y: -40, opacity: 0, duration: 0.6 })
-    .from('.hero__title', { y: 24, opacity: 0, duration: 0.7 }, '-=0.3')
-    .from('.hero__lead', { y: 20, opacity: 0, duration: 0.6 }, '-=0.45')
-    .from('.canvas-container', { scale: 0.96, opacity: 0, duration: 0.8 }, '-=0.4')
+// Anima APENAS translateY — nunca opacity. Se algo travar a animação, o conteúdo
+// continua 100% visível, só fica sem o efeito de slide-in.
+function runEntrance() {
+  const tl = gsap.timeline({ defaults: { ease: 'power3.out' } });
+  tl.from('.header', { y: -32, duration: 0.55, clearProps: 'transform,translate' })
+    .from('.hero__title', { y: 18, duration: 0.6, clearProps: 'transform,translate' }, '-=0.2')
+    .from('.hero__lead', { y: 14, duration: 0.55, clearProps: 'transform,translate' }, '-=0.4')
+    .from('.canvas-container', { y: 24, duration: 0.7, clearProps: 'transform,translate' }, '-=0.35')
     .from(
       '.scene-controls > *',
-      { y: 14, opacity: 0, duration: 0.45, stagger: 0.06 },
-      '-=0.4'
+      { y: 10, duration: 0.4, stagger: 0.05, clearProps: 'transform,translate' },
+      '-=0.35'
     );
-
-  document.querySelectorAll('.info, .about').forEach((section) => {
-    gsap.set(section, { opacity: 0, y: 30 });
-    observeOnce(section, () => {
-      gsap.to(section, {
-        opacity: 1,
-        y: 0,
-        duration: 0.7,
-        ease: 'power2.out',
-        clearProps: 'all'
-      });
-    });
-  });
 }
 
 function bindHoverMicroInteractions() {
@@ -115,23 +81,4 @@ function bindHoverMicroInteractions() {
     btn.addEventListener('focus', enter);
     btn.addEventListener('blur', leave);
   });
-}
-
-function observeOnce(element, callback) {
-  if (!('IntersectionObserver' in window)) {
-    callback();
-    return;
-  }
-  const observer = new IntersectionObserver(
-    (entries) => {
-      entries.forEach((entry) => {
-        if (entry.isIntersecting) {
-          callback();
-          observer.disconnect();
-        }
-      });
-    },
-    { threshold: 0.15 }
-  );
-  observer.observe(element);
 }
