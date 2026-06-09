@@ -1,5 +1,15 @@
 # Cena 3D Interativa Acessível — Three.js + Sketchfab
 
+[![Deploy GitHub Pages](https://github.com/Gabrielfontesl/projeto-threejs-acessivel/actions/workflows/deploy.yml/badge.svg)](https://github.com/Gabrielfontesl/projeto-threejs-acessivel/actions/workflows/deploy.yml)
+[![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](LICENSE)
+[![Built with Vite](https://img.shields.io/badge/Vite-5.4-646CFF?logo=vite&logoColor=white)](https://vitejs.dev/)
+[![Three.js](https://img.shields.io/badge/Three.js-r169-000000?logo=three.js&logoColor=white)](https://threejs.org/)
+[![VLibras](https://img.shields.io/badge/Acessibilidade-VLibras-009688)](https://vlibras.gov.br/)
+
+> **🌐 Demo ao vivo:** https://gabrielfontesl.github.io/projeto-threejs-acessivel/
+> **💻 Código:** https://github.com/Gabrielfontesl/projeto-threejs-acessivel
+> **👤 Autor:** Gabriel Fontes Lima ([@Gabrielfontesl](https://github.com/Gabrielfontesl)) — projeto individual
+
 Aplicação web que carrega modelos 3D do **Sketchfab** usando **Three.js** com câmera totalmente
 interativa (rotação, zoom e pan via mouse, toque e teclado), animações com **GSAP**, rolagem
 suave com **Lenis** e uma camada robusta de **acessibilidade** — incluindo o widget oficial do
@@ -185,16 +195,13 @@ git push -u origin main
 
 ---
 
-## 👥 Responsabilidades da equipe
+## 👥 Responsabilidades
 
-> Substitua `[Nome]` pelos nomes dos integrantes.
+Projeto **individual** — todas as etapas executadas por um único integrante.
 
 | Integrante | Responsabilidades |
 |------------|-------------------|
-| **[Nome 1]** | Setup do projeto Vite, estrutura HTML semântica, integração inicial do Three.js |
-| **[Nome 2]** | Escolha do modelo Sketchfab, `GLTFLoader`, configuração das três fontes de luz e sombras |
-| **[Nome 3]** | `OrbitControls`, loop com `requestAnimationFrame`, `resize handler`, controles da cena (reset/auto-rotação/wireframe) |
-| **[Nome 4]** | Acessibilidade completa (VLibras, contraste, fonte, tema, ARIA, navegação por teclado), animações GSAP, rolagem Lenis, deploy |
+| **Gabriel Fontes Lima** ([@Gabrielfontesl](https://github.com/Gabrielfontesl)) | Projeto integral: setup Vite, estrutura HTML semântica, integração Three.js (renderer, cena, câmera, três fontes de luz, sombras), `GLTFLoader` carregando modelo glTF, `OrbitControls` com mouse/touch/teclado, loop `requestAnimationFrame`, `resize handler`, animações GSAP (timeline de entrada e micro-interações), rolagem suave Lenis, acessibilidade completa (VLibras, alto contraste, controles de fonte, tema claro/escuro, skip link, navegação por teclado, ARIA completo, live region, foco visível, `prefers-reduced-motion`), README, CONTRIBUTING, ACCESSIBILITY, templates de Issue/PR, GitHub Actions de deploy contínuo para GitHub Pages. |
 
 ---
 
