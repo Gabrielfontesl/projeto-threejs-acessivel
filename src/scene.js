@@ -1,6 +1,7 @@
 import * as THREE from 'three';
 import { OrbitControls } from 'three/addons/controls/OrbitControls.js';
 import { GLTFLoader } from 'three/addons/loaders/GLTFLoader.js';
+import gsap from 'gsap';
 
 // Modelo incluído: BoomBox.glb (Khronos Group glTF Sample Models, licença CC0).
 // Para usar seu próprio modelo do Sketchfab, substitua o arquivo em `public/models/scene.glb`
@@ -244,6 +245,51 @@ export function initScene({ container, loadingScreen, loadingBar, loadingText, a
       const value = parseFloat(e.target.value);
       directionalLight.intensity = value;
       e.target.setAttribute('aria-valuenow', value.toString());
+    });
+  }
+
+  // Tour automático — combina GSAP (timing/easing) + Three.js (manipulação da câmera).
+  // Anima a câmera em uma órbita completa ao redor do modelo, mantendo o foco no alvo.
+  const tourBtn = document.getElementById('tour-camera');
+  let tourTween = null;
+  if (tourBtn) {
+    tourBtn.addEventListener('click', () => {
+      if (tourTween) {
+        tourTween.kill();
+        tourTween = null;
+        tourBtn.setAttribute('aria-pressed', 'false');
+        controls.enabled = true;
+        announce?.('Tour interrompido.');
+        return;
+      }
+
+      tourBtn.setAttribute('aria-pressed', 'true');
+      controls.enabled = false;
+      const target = controls.target;
+      const radius = camera.position.distanceTo(target);
+      const startAngle = Math.atan2(camera.position.x - target.x, camera.position.z - target.z);
+      const startY = camera.position.y;
+      const state = { angle: startAngle };
+
+      tourTween = gsap.to(state, {
+        angle: startAngle + Math.PI * 2,
+        duration: 6,
+        ease: 'power1.inOut',
+        onUpdate: () => {
+          camera.position.x = target.x + Math.sin(state.angle) * radius;
+          camera.position.z = target.z + Math.cos(state.angle) * radius;
+          camera.position.y = startY;
+          camera.lookAt(target);
+        },
+        onComplete: () => {
+          tourTween = null;
+          tourBtn.setAttribute('aria-pressed', 'false');
+          controls.enabled = true;
+          announce?.('Tour da câmera concluído.');
+        }
+      });
+
+      announce?.('Tour automático iniciado — câmera orbitando ao redor do modelo.');
     });
   }
 
