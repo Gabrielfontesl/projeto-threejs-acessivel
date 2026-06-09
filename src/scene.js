@@ -28,14 +28,16 @@ export function initScene({ container, loadingScreen, loadingBar, loadingText, a
   renderer.shadowMap.type = THREE.PCFSoftShadowMap;
   container.appendChild(renderer.domElement);
 
-  // Impede que o scroll/zoom na cena role a página
-  container.addEventListener(
-    'wheel',
-    (event) => {
-      event.preventDefault();
-    },
-    { passive: false }
-  );
+  // Impede que o scroll/zoom na cena role a página em qualquer cenário.
+  // - preventDefault bloqueia o scroll nativo do browser.
+  // - stopPropagation impede que o Lenis (no window) veja o evento.
+  // Usamos fase bubble pra que o OrbitControls (na canvas interna) receba o wheel primeiro.
+  const stopWheelLeak = (event) => {
+    event.preventDefault();
+    event.stopPropagation();
+  };
+  container.addEventListener('wheel', stopWheelLeak, { passive: false });
+  container.addEventListener('touchmove', stopWheelLeak, { passive: false });
 
   const scene = new THREE.Scene();
   scene.background = new THREE.Color(0x131826);
