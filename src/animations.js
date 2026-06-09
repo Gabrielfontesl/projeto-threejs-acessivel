@@ -1,13 +1,45 @@
 import gsap from 'gsap';
 import Lenis from 'lenis';
 
-export function initAnimations() {
-  const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-  if (reduceMotion) return;
+const ANIMATED_SELECTORS = [
+  '.header',
+  '.hero__title',
+  '.hero__lead',
+  '.canvas-container',
+  '.scene-controls > *',
+  '.info',
+  '.about'
+];
 
-  initLenis();
-  runEntrance();
-  bindHoverMicroInteractions();
+export function initAnimations() {
+  // Rede de segurança: independente do que aconteça, libera o conteúdo em 3s
+  const safety = setTimeout(forceVisible, 3000);
+
+  const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  if (reduceMotion) {
+    clearTimeout(safety);
+    return;
+  }
+
+  try {
+    initLenis();
+    runEntrance(() => clearTimeout(safety));
+    bindHoverMicroInteractions();
+  } catch (err) {
+    console.warn('Falha na inicialização das animações:', err);
+    clearTimeout(safety);
+    forceVisible();
+  }
+}
+
+function forceVisible() {
+  document.querySelectorAll(ANIMATED_SELECTORS.join(',')).forEach((el) => {
+    el.style.opacity = '';
+    el.style.transform = '';
+    el.style.translate = '';
+    el.style.rotate = '';
+    el.style.scale = '';
+  });
 }
 
 function initLenis() {
@@ -25,7 +57,6 @@ function initLenis() {
   };
   requestAnimationFrame(raf);
 
-  // Permite que o skip link pule corretamente mesmo com Lenis ativo
   document.querySelector('.skip-link')?.addEventListener('click', (event) => {
     const href = event.currentTarget.getAttribute('href');
     if (!href || !href.startsWith('#')) return;
@@ -38,8 +69,11 @@ function initLenis() {
   });
 }
 
-function runEntrance() {
-  const tl = gsap.timeline({ defaults: { ease: 'power3.out' } });
+function runEntrance(onDone) {
+  const tl = gsap.timeline({
+    defaults: { ease: 'power3.out', clearProps: 'all' },
+    onComplete: onDone
+  });
   tl.from('.header', { y: -40, opacity: 0, duration: 0.6 })
     .from('.hero__title', { y: 24, opacity: 0, duration: 0.7 }, '-=0.3')
     .from('.hero__lead', { y: 20, opacity: 0, duration: 0.6 }, '-=0.45')
@@ -50,11 +84,16 @@ function runEntrance() {
       '-=0.4'
     );
 
-  // Fade-in suave para seções abaixo da dobra
   document.querySelectorAll('.info, .about').forEach((section) => {
     gsap.set(section, { opacity: 0, y: 30 });
     observeOnce(section, () => {
-      gsap.to(section, { opacity: 1, y: 0, duration: 0.7, ease: 'power2.out' });
+      gsap.to(section, {
+        opacity: 1,
+        y: 0,
+        duration: 0.7,
+        ease: 'power2.out',
+        clearProps: 'all'
+      });
     });
   });
 }
@@ -62,18 +101,12 @@ function runEntrance() {
 function bindHoverMicroInteractions() {
   const buttons = document.querySelectorAll('.ctrl-btn, .a11y-btn');
   buttons.forEach((btn) => {
-    btn.addEventListener('mouseenter', () => {
-      gsap.to(btn, { scale: 1.04, duration: 0.18, ease: 'power2.out' });
-    });
-    btn.addEventListener('mouseleave', () => {
-      gsap.to(btn, { scale: 1, duration: 0.18, ease: 'power2.out' });
-    });
-    btn.addEventListener('focus', () => {
-      gsap.to(btn, { scale: 1.04, duration: 0.18, ease: 'power2.out' });
-    });
-    btn.addEventListener('blur', () => {
-      gsap.to(btn, { scale: 1, duration: 0.18, ease: 'power2.out' });
-    });
+    const enter = () => gsap.to(btn, { scale: 1.04, duration: 0.18, ease: 'power2.out' });
+    const leave = () => gsap.to(btn, { scale: 1, duration: 0.18, ease: 'power2.out' });
+    btn.addEventListener('mouseenter', enter);
+    btn.addEventListener('mouseleave', leave);
+    btn.addEventListener('focus', enter);
+    btn.addEventListener('blur', leave);
   });
 }
 
