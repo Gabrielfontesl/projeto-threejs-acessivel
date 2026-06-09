@@ -48,7 +48,14 @@ function initLenis() {
     easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
     smoothWheel: true,
     wheelMultiplier: 1.0,
-    touchMultiplier: 1.4
+    touchMultiplier: 1.4,
+    // Não intercepta rolagem sobre a cena 3D nem sobre o widget do VLibras
+    prevent: (node) => {
+      if (!(node instanceof Element)) return false;
+      if (node.closest('#canvas-container')) return true;
+      if (node.closest('[vw]')) return true;
+      return false;
+    }
   });
 
   const raf = (time) => {
