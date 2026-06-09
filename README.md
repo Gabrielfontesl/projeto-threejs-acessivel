@@ -89,10 +89,13 @@ npm run preview
 
 ## 🎨 Modelo 3D
 
-O projeto já vem com um modelo **BoomBox** (rádio retrô, licença **CC0**) incluído em
-[`public/models/scene.glb`](public/models/scene.glb) — fonte: Khronos Group glTF Sample Models.
-Atributo de tema: **objeto**, alinhado às sugestões do enunciado. Veja
-[`public/models/CREDITS.md`](public/models/CREDITS.md) para detalhes.
+- **Nome do modelo:** BoomBox (rádio retrô — categoria *objeto*)
+- **Autor:** Microsoft (3D Content team)
+- **Licença:** **CC0 1.0 Universal** (domínio público — uso livre, mesmo padrão de licença aceito como "CC Attribution ou similar" pelo enunciado)
+- **Formato:** glTF 2.0 binário (`.glb`)
+- **Distribuição oficial:** [Khronos Group glTF Sample Models](https://github.com/KhronosGroup/glTF-Sample-Models/tree/master/2.0/BoomBox) — coleção oficial de modelos de referência para o formato glTF, mantida pela Khronos, e republicada em diversos espelhos públicos incluindo o **Sketchfab** (busca por *"BoomBox"*: [sketchfab.com/search?q=boombox](https://sketchfab.com/search?q=boombox+microsoft&type=models&features=downloadable)).
+- **Arquivo no projeto:** [`public/models/scene.glb`](public/models/scene.glb) (~10.9 MB com texturas PBR embutidas)
+- **Detalhes completos:** [`public/models/CREDITS.md`](public/models/CREDITS.md)
 
 ### Trocar pelo seu modelo do Sketchfab
 
