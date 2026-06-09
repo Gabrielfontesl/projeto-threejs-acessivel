@@ -59,6 +59,9 @@
           tabindex="0"
           role="application"
           aria-label="Cena 3D interativa. Use o mouse, toque ou as setas do teclado para girar a câmera. Use + e − para zoom."
+          data-lenis-prevent
+          data-lenis-prevent-wheel
+          data-lenis-prevent-touch
         >
           <div id="loading-screen" class="loading-screen" aria-live="polite" aria-busy="true">
             <div class="loading-screen__spinner" aria-hidden="true"></div>
@@ -148,13 +151,9 @@
         <div class="vw-plugin-top-wrapper"></div>
       </div>
     </div>
-    <script src="https://vlibras.gov.br/app/vlibras-plugin.js" defer></script>
+    <script src="https://vlibras.gov.br/app/vlibras-plugin.js"></script>
     <script>
-      window.addEventListener('load', () => {
-        if (window.VLibras && typeof window.VLibras.Widget === 'function') {
-          new window.VLibras.Widget('https://vlibras.gov.br/app');
-        }
-      });
+      new window.VLibras.Widget('https://vlibras.gov.br/app');
     </script>
 
     <script type="module" src="/src/main.js"></script>

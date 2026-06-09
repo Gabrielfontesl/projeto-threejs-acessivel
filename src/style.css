@@ -536,6 +536,20 @@ input:focus-visible {
 }
 
 /* ============================================================
+   VLibras — força posição fixa no canto inferior direito
+   (o CSS do widget seta position:fixed sem offsets, então sem este
+   override o botão fica colado ao final do body, fora da viewport)
+   ============================================================ */
+div[vw],
+div[vw].enabled {
+  position: fixed !important;
+  right: 0 !important;
+  bottom: 0 !important;
+  top: auto !important;
+  left: auto !important;
+}
+
+/* ============================================================
    Reduced motion
    ============================================================ */
 @media (prefers-reduced-motion: reduce) {
